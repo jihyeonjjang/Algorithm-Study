@@ -10,7 +10,7 @@ public class b2445 {
         int n = Integer.parseInt(br.readLine());
         StringBuilder sb = new StringBuilder();
 
-        for(int i=1; i<n; i++){
+        for(int i=1; i<=n; i++){
             for(int a=1; a<=i; a++){
                 sb.append("*");
             }
@@ -22,11 +22,6 @@ public class b2445 {
             }
             sb.append("\n");
         }
-        for(int s=0; s<n*2; s++){
-            sb.append("*");
-        }
-        sb.append("\n");
-
         for(int i=1; i<n; i++){
             for(int a=1; a<=n-i; a++){
                 sb.append("*");

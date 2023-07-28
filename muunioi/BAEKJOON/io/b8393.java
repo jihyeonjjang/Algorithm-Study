@@ -9,8 +9,9 @@ public class b8393 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
         int result = 0;
-        while(n-->0){
-            result += n+1;
+        while(n>0){
+            result += n;
+            n--;
         }
         System.out.println(result);
     }

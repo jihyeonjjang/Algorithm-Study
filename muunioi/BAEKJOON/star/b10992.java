@@ -36,5 +36,6 @@ public class b10992 {
             sb.append("*");
         }
         System.out.println(sb);
+
     }
 }

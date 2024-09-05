@@ -7,19 +7,19 @@
 
 import Foundation
 
-var start = 0, end = 0, count = 0
 let N = Int(readLine()!)!
 let M = Int(readLine()!)!
-let array : [Int] = readLine()!.split(separator: " ").map{ Int(String($0))! }
+var array : [Int] = readLine()!.split(separator: " ").map{ Int(String($0))! }
+var i = 0, j = N-1, count = 0
+array = array.sorted()
 
-while start != N-1 {
-    while end != N-1 {
-        end += 1
-        if array[start]+array[end] == M {
-            count += 1
-        }
+while i < j {
+    if array[i] + array[j] < M { i += 1 }
+    else if array[i] + array[j] > M { j -= 1 }
+    else {
+        count += 1
+        i += 1
+        j -= 1
     }
-    start += 1
-    end = start
 }
 print(count)

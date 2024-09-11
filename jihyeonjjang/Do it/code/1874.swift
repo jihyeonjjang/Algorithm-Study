@@ -10,46 +10,30 @@ import Foundation
 let length = Int(readLine()!)!
 var sequence = [Int]()
 var stack = [Int]()
-var popNum = 0
 var result = [String]()
 var num = 1
 for _ in 1...length {
     sequence.append(Int(readLine()!)!)
 }
 
-for i in 1...length {
-    if sequence[i-1] >= num {
-        while sequence[i-1] >= num {
-            push(num)
+for target in sequence {
+    if target >= num {
+        while target >= num {
+            stack.append(num)
             result.append("+")
             num += 1
         }
-        popNum = pop()
+        stack.popLast()
         result.append("-")
     } else { // sequence[i-1] < num
-        popNum = pop()
-        if popNum > sequence[i-1] {
-            result.removeAll()
+        if let last = stack.popLast(), last > target {
             print("NO")
-            break
+            exit(0)
         } else {
             result.append("-")
         }
     }
 }
 
-if !result.isEmpty {
-    for i in 0..<result.count {
-        print(result[i])
-    }
-}
+print(result.joined(separator: "\n"))
 
-
-func push(_ i: Int){
-    stack.append(i)
-}
-
-func pop() -> Int {
-    let popNum = stack.popLast()!
-    return popNum
-}

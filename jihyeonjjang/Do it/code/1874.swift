@@ -7,53 +7,49 @@
 
 import Foundation
 
-let num = Int(readLine()!)!
-var stackArr = [Int]()
-var result = [String]()
+let length = Int(readLine()!)!
 var sequence = [Int]()
-
-sequence.append(Int(readLine()!)!)
-for i in 1...sequence[0] {
-    push(i)
-}
-pop()
-
-for i in 1..<num {
+var stack = [Int]()
+var popNum = 0
+var result = [String]()
+var num = 1
+for _ in 1...length {
     sequence.append(Int(readLine()!)!)
-    if stackArr.isEmpty {
-        for j in sequence.filter({ $0 != sequence.max()! }).max()!+1...sequence[i] {
-            push(j)
+}
+
+for i in 1...length {
+    if sequence[i-1] >= num {
+        while sequence[i-1] >= num {
+            push(num)
+            result.append("+")
+            num += 1
         }
-        pop()
-    } else {
-        if sequence[i] == stackArr.last! {
-            pop()
-        } else if sequence[i] > stackArr.last! {
-            for j in sequence.filter({ $0 != sequence.max()! }).max()!+1...sequence[i] {
-                push(j)
-            }
-            pop()
-        } else {
+        popNum = pop()
+        result.append("-")
+    } else { // sequence[i-1] < num
+        popNum = pop()
+        if popNum > sequence[i-1] {
             result.removeAll()
-            result.append("NO")
+            print("NO")
             break
+        } else {
+            result.append("-")
         }
     }
 }
-if result.count == 1 {
-    print(result[0])
-} else {
+
+if !result.isEmpty {
     for i in 0..<result.count {
         print(result[i])
     }
 }
 
-func push(_ i: Int) {
-    stackArr.append(i)
-    result.append("+")
+
+func push(_ i: Int){
+    stack.append(i)
 }
 
-func pop() {
-    stackArr.removeLast()
-    result.append("-")
+func pop() -> Int {
+    let popNum = stack.popLast()!
+    return popNum
 }
